@@ -98,7 +98,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          
+          <a
             href="#register"
             onClick={() => setMenuOpen(false)}
             className="mt-1 text-center py-2.5 px-4 rounded-xl bg-brand-purple text-white text-sm font-semibold"
