@@ -1,6 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
-import { RocketIcon, WhatsAppIcon, CheckIcon, LocationIcon } from "./Icons";
+import { RocketIcon, WhatsAppIcon, CheckIcon } from "./Icons";
 
 const packages = [
   "Neo 100Mbps - Rp 233.100/bulan",
@@ -21,6 +21,31 @@ interface FormData {
   agreed: boolean;
 }
 
+function IconFlash() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" fill="#F59E0B" stroke="#F59E0B" strokeWidth="1.5" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function IconWrench() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function IconSatellite() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="3" stroke="#06B6D4" strokeWidth="2"/>
+      <path d="M6.3 6.3a8 8 0 000 11.4M17.7 6.3a8 8 0 010 11.4M3.5 3.5a13 13 0 000 17M20.5 3.5a13 13 0 010 17" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
 export default function RegisterForm() {
   const [form, setForm] = useState<FormData>({
     name: "",
@@ -37,37 +62,29 @@ export default function RegisterForm() {
     e.preventDefault();
     if (!form.name || !form.phone || !form.address || !form.package || !form.agreed) return;
 
-    const msg = `🚀 *REQUEST PEMASANGAN MYREPUBLIC*
-
-👤 *Nama:* ${form.name}
-📱 *No. HP:* ${form.phone}
-📧 *Email:* ${form.email || "-"}
-📍 *Alamat:* ${form.address}
-📦 *Paket:* ${form.package}
-
-Mohon diproses ya kak, terima kasih! 🙏`;
+    const msg = `🚀 *REQUEST PEMASANGAN MYREPUBLIC*\n\n👤 *Nama:* ${form.name}\n📱 *No. HP:* ${form.phone}\n📧 *Email:* ${form.email || "-"}\n📍 *Alamat:* ${form.address}\n📦 *Paket:* ${form.package}\n\nMohon diproses ya kak, terima kasih! 🙏`;
 
     window.open(`https://wa.me/6287720009792?text=${encodeURIComponent(msg)}`, "_blank");
     setSubmitted(true);
   };
 
   const inputClass = (field: string) =>
-    `w-full px-4 py-3.5 rounded-2xl bg-white/5 border text-white placeholder-white/30 text-sm transition-all duration-300 outline-none ${
+    `w-full px-4 py-3.5 rounded-2xl bg-white border text-slate-800 placeholder-slate-400 text-sm transition-all duration-300 outline-none ${
       focused === field
-        ? "border-brand-purple shadow-[0_0_20px_rgba(124,58,237,0.2)]"
-        : "border-white/10 hover:border-white/20"
+        ? "border-brand-purple shadow-[0_0_0_3px_rgba(124,58,237,0.1)]"
+        : "border-slate-200 hover:border-slate-300"
     }`;
 
   if (submitted) {
     return (
-      <section id="register" className="py-24 relative">
+      <section id="register" className="py-24 relative bg-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div className="glass-purple rounded-3xl p-12">
-            <div className="w-20 h-20 rounded-full bg-neon-green/20 border border-neon-green/30 flex items-center justify-center mx-auto mb-6" style={{ boxShadow: "0 0 40px rgba(34,197,94,0.3)" }}>
+          <div className="bg-white border border-slate-100 shadow-lg rounded-3xl p-12">
+            <div className="w-20 h-20 rounded-full bg-neon-green/15 border border-neon-green/30 flex items-center justify-center mx-auto mb-6" style={{ boxShadow: "0 0 40px rgba(34,197,94,0.2)" }}>
               <CheckIcon className="w-10 h-10 text-neon-green" />
             </div>
-            <h3 className="font-display font-800 text-3xl text-white mb-3">Request Terkirim!</h3>
-            <p className="text-white/60 mb-8">Tim sales kami akan segera menghubungi kamu via WhatsApp. Terima kasih sudah memilih MyRepublic! 🚀</p>
+            <h3 className="font-display font-bold text-3xl text-slate-900 mb-3">Request Terkirim!</h3>
+            <p className="text-slate-500 mb-8">Tim sales kami akan segera menghubungi kamu via WhatsApp. Terima kasih sudah memilih MyRepublic! 🚀</p>
             <button
               onClick={() => setSubmitted(false)}
               className="px-8 py-3.5 rounded-2xl bg-brand-purple text-white font-semibold hover:opacity-90 transition-opacity"
@@ -81,40 +98,33 @@ Mohon diproses ya kak, terima kasih! 🙏`;
   }
 
   return (
-    <section id="register" className="py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/40 to-transparent" />
-
-      {/* Background */}
+    <section id="register" className="py-24 relative overflow-hidden bg-white">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/20 to-transparent" />
       <div className="absolute inset-0 dot-grid opacity-20" />
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-neon-cyan/8 rounded-full blur-[100px]" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-purple/5 rounded-full blur-[120px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left info */}
           <div>
-            <div className="inline-flex items-center gap-2 glass-purple px-4 py-2 rounded-full mb-6">
-              <RocketIcon className="w-4 h-4 text-brand-light" />
-              <span className="text-xs font-semibold text-brand-light tracking-wider uppercase">Daftar Sekarang</span>
-            </div>
-            <h2 className="font-display font-800 text-4xl sm:text-5xl text-white mb-6 tracking-tight leading-tight">
+            <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-900 mb-6 tracking-tight leading-tight">
               Mulai Nikmati<br /><span className="gradient-text">Internet Cepat</span><br />Hari Ini
             </h2>
-            <p className="text-white/50 mb-10 leading-relaxed">
+            <p className="text-slate-500 mb-10 leading-relaxed">
               Isi formulir di samping dan tim sales kami akan menghubungi kamu via WhatsApp untuk proses pemasangan yang cepat dan mudah.
             </p>
 
             <div className="space-y-4">
               {[
-                { icon: "⚡", title: "Proses Cepat", desc: "Tim kami respons dalam 30 menit" },
-                { icon: "🔧", title: "Instalasi Gratis", desc: "Teknisi berpengalaman ke lokasi kamu" },
-                { icon: "📡", title: "Langsung Online", desc: "Aktif dalam 1-3 hari kerja" },
+                { icon: <IconFlash />, title: "Proses Cepat", desc: "Tim kami respons dalam 30 menit" },
+                { icon: <IconWrench />, title: "Instalasi Gratis", desc: "Teknisi berpengalaman ke lokasi kamu" },
+                { icon: <IconSatellite />, title: "Langsung Online", desc: "Aktif dalam 1-3 hari kerja" },
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 glass rounded-2xl p-4">
-                  <span className="text-2xl">{item.icon}</span>
+                <div key={i} className="flex items-center gap-4 bg-white border border-slate-100 shadow-sm rounded-2xl p-4">
+                  <span className="flex-shrink-0">{item.icon}</span>
                   <div>
-                    <div className="font-semibold text-white text-sm">{item.title}</div>
-                    <div className="text-white/40 text-xs">{item.desc}</div>
+                    <div className="font-semibold text-slate-800 text-sm">{item.title}</div>
+                    <div className="text-slate-400 text-xs">{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -124,18 +134,13 @@ Mohon diproses ya kak, terima kasih! 🙏`;
           {/* Form */}
           <div>
             <div
-              className="rounded-3xl p-8"
-              style={{
-                background: "rgba(124, 58, 237, 0.05)",
-                border: "1px solid rgba(124, 58, 237, 0.2)",
-                backdropFilter: "blur(20px)",
-              }}
+              className="rounded-3xl p-8 bg-white border border-slate-100 shadow-lg"
             >
-              <h3 className="font-display font-700 text-xl text-white mb-6">Formulir Langganan Internet</h3>
+              <h3 className="font-display font-bold text-xl text-slate-900 mb-6">Formulir Langganan Internet</h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Nama Lengkap *
                   </label>
                   <input
@@ -151,7 +156,7 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Nomor Telepon *
                   </label>
                   <input
@@ -167,7 +172,7 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Alamat Email
                   </label>
                   <input
@@ -182,7 +187,7 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Alamat Pemasangan *
                   </label>
                   <textarea
@@ -197,7 +202,7 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Pilihan Paket Internet *
                   </label>
                   <select
@@ -208,9 +213,9 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                     className={`${inputClass("package")} cursor-pointer`}
                     required
                   >
-                    <option value="" disabled className="bg-dark-800 text-white/50">Pilih Paket...</option>
+                    <option value="" disabled className="bg-white text-slate-400">Pilih Paket...</option>
                     {packages.map((pkg) => (
-                      <option key={pkg} value={pkg} className="bg-dark-800 text-white">{pkg}</option>
+                      <option key={pkg} value={pkg} className="bg-white text-slate-800">{pkg}</option>
                     ))}
                   </select>
                 </div>
@@ -227,7 +232,7 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                       className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-200 ${
                         form.agreed
                           ? "bg-brand-purple border-brand-purple"
-                          : "border-white/30 group-hover:border-white/50"
+                          : "border-slate-300 group-hover:border-slate-400"
                       }`}
                     >
                       {form.agreed && (
@@ -237,9 +242,9 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                       )}
                     </div>
                   </div>
-                  <span className="text-xs text-white/50 leading-relaxed">
+                  <span className="text-xs text-slate-500 leading-relaxed">
                     Anda telah membaca dan menyetujui{" "}
-                    <span className="text-brand-light hover:underline cursor-pointer">Kebijakan Privasi</span> kami.
+                    <span className="text-brand-purple hover:underline cursor-pointer">Kebijakan Privasi</span> kami.
                   </span>
                 </label>
 
@@ -249,14 +254,14 @@ Mohon diproses ya kak, terima kasih! 🙏`;
                   className="w-full py-4 rounded-2xl font-bold text-white flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 group"
                   style={{
                     background: "linear-gradient(135deg, #22C55E, #16A34A)",
-                    boxShadow: form.agreed ? "0 0 30px rgba(34,197,94,0.4)" : "none",
+                    boxShadow: form.agreed ? "0 0 30px rgba(34,197,94,0.3)" : "none",
                   }}
                 >
                   <WhatsAppIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   REQUEST PEMASANGAN
                 </button>
 
-                <p className="text-center text-white/30 text-xs">
+                <p className="text-center text-slate-400 text-xs">
                   Form ini akan mengarahkan ke WhatsApp sales kami
                 </p>
               </form>
