@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { CheckIcon, ArrowRightIcon, RocketIcon, SpeedIcon } from "./Icons";
+import { CheckIcon, ArrowRightIcon, RocketIcon } from "./Icons";
 
 type PackageType = "fiber" | "combo";
 
@@ -308,10 +308,10 @@ export default function Packages() {
           </div>
         </div>
 
-        {/* Desktop grid */}
-        <div className={`hidden sm:grid gap-6 ${packages.length > 3 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} justify-items-center`}>
+        {/* Desktop grid — semua card tinggi sama, button selalu di bawah */}
+        <div className={`hidden sm:grid gap-6 ${packages.length > 3 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} items-stretch`}>
           {packages.map((pkg) => (
-            <div key={pkg.id} className="relative w-full max-w-sm card-hover">
+            <div key={pkg.id} className="relative w-full max-w-sm mx-auto card-hover flex flex-col">
               {pkg.tag && (
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold text-white z-10 tracking-wider"
@@ -321,7 +321,7 @@ export default function Packages() {
                 </div>
               )}
               <div
-                className="h-full rounded-3xl p-6 flex flex-col bg-white border shadow-sm"
+                className="rounded-3xl p-6 flex flex-col flex-1 bg-white border shadow-sm h-full"
                 style={{ borderColor: pkg.color + "33" }}
               >
                 <div className="mb-6">
@@ -364,7 +364,7 @@ export default function Packages() {
                 </ul>
                 <button
                   onClick={() => handleSubscribe(pkg)}
-                  className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-all duration-300 hover:scale-[1.02]"
+                  className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-all duration-300 hover:scale-[1.02] mt-auto"
                   style={{ background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}bb)`, boxShadow: `0 0 20px ${pkg.glow}` }}
                 >
                   Langganan Sekarang
