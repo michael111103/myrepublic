@@ -23,7 +23,7 @@ export default function Footer() {
           <p className="text-slate-500 mb-8">Hubungi sales kami sekarang dan dapatkan penawaran terbaik!</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            
+            <a
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export default function Footer() {
               <WhatsAppIcon className="w-5 h-5" />
               0812 1244 9194
             </a>
-            
+            <a
               href="#register"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-slate-700 bg-white border border-slate-200 hover:border-brand-purple/50 transition-all duration-300"
             >
@@ -78,7 +78,7 @@ export default function Footer() {
               { icon: InstagramIcon, href: "#" },
               { icon: WhatsAppIcon, href: waLink },
             ].map((social, i) => (
-              
+              <a
                 key={i}
                 href={social.href}
                 target="_blank"
@@ -94,7 +94,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-400 text-xs">
-            © 2024 MyRepublic Bandung. Sales Resmi MyRepublic Indonesia.
+            © 2024 MyRepublic. Sales Resmi MyRepublic Indonesia.
           </p>
           <div className="flex gap-6">
             {["Kebijakan Privasi", "Syarat & Ketentuan"].map((link) => (
