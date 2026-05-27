@@ -141,7 +141,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               </a>
 
-              
+              <a
                 href={`https://wa.me/6287720009792?text=${encodeURIComponent("Halo, saya tertarik dengan paket internet MyRepublic. Bisa minta informasi lebih lanjut?")}`}
                 target="_blank"
                 rel="noopener noreferrer"
