@@ -129,7 +129,7 @@ export default function Hero() {
             <div
               className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-700 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
-              
+              <a
                 href="#register"
                 className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-white overflow-hidden animate-border-glow"
                 style={{
