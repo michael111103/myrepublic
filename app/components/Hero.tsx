@@ -2,12 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { RocketIcon, WhatsAppIcon } from "./Icons";
 
-const stats = [
-  { value: "99.9%", label: "Uptime" },
-  { value: "50K+", label: "Pelanggan" },
-  { value: "24/7", label: "Support" },
-];
-
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -136,18 +130,6 @@ export default function Hero() {
             <WhatsAppIcon className="w-5 h-5 text-neon-green group-hover:scale-110 transition-transform" />
             <span>Tanya Sales</span>
           </a>
-        </div>
-
-        {/* Stats */}
-        <div
-          className={`flex items-center gap-8 mt-14 justify-center transition-all duration-700 delay-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-        >
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="font-display font-bold text-2xl gradient-text">{stat.value}</div>
-              <div className="text-xs text-slate-400 font-medium mt-0.5">{stat.label}</div>
-            </div>
-          ))}
         </div>
       </div>
 
