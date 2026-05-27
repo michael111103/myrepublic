@@ -7,48 +7,48 @@ const features = [
     title: "Ultra High Speed",
     desc: "Kecepatan fiber optik hingga 1 Gbps untuk semua aktivitas digital tanpa buffering.",
     color: "#7C3AED",
-    glow: "rgba(124,58,237,0.3)",
+    glow: "rgba(124,58,237,0.15)",
   },
   {
     icon: ShieldIcon,
     title: "Koneksi Stabil",
     desc: "Garansi uptime 99.9% dengan infrastruktur jaringan terpercaya yang terus dipantau.",
     color: "#06B6D4",
-    glow: "rgba(6,182,212,0.3)",
+    glow: "rgba(6,182,212,0.15)",
   },
   {
     icon: StreamIcon,
     title: "Streaming 4K",
     desc: "Nikmati streaming Netflix, YouTube, Disney+ dalam kualitas 4K tanpa lag.",
     color: "#22C55E",
-    glow: "rgba(34,197,94,0.3)",
+    glow: "rgba(34,197,94,0.15)",
   },
   {
     icon: GameIcon,
     title: "Gaming Tanpa Hambatan",
     desc: "Latency rendah di bawah 5ms untuk pengalaman gaming online yang kompetitif.",
     color: "#F59E0B",
-    glow: "rgba(245,158,11,0.3)",
+    glow: "rgba(245,158,11,0.15)",
   },
   {
     icon: TvIcon,
     title: "Hiburan Terlengkap",
     desc: "Paket combo internet + TV dengan 150+ channel dan platform streaming populer.",
     color: "#EC4899",
-    glow: "rgba(236,72,153,0.3)",
+    glow: "rgba(236,72,153,0.15)",
   },
   {
     icon: WifiIcon,
     title: "WiFi Seluruh Rumah",
     desc: "Router WiFi 6 generasi terbaru untuk jangkauan sinyal optimal di seluruh rumah.",
     color: "#8B5CF6",
-    glow: "rgba(139,92,246,0.3)",
+    glow: "rgba(139,92,246,0.15)",
   },
 ];
 
 export default function Features() {
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative bg-white">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
 
       {/* Background glow */}
@@ -61,10 +61,10 @@ export default function Features() {
             <WifiIcon className="w-4 h-4 text-brand-light" />
             <span className="text-xs font-semibold text-brand-light tracking-wider uppercase">Keunggulan Kami</span>
           </div>
-          <h2 className="font-display font-800 text-4xl sm:text-5xl text-white mb-4 tracking-tight">
+          <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-900 mb-4 tracking-tight">
             Kenapa <span className="gradient-text">MyRepublic</span>?
           </h2>
-          <p className="text-white/50 max-w-lg mx-auto">
+          <p className="text-slate-400 max-w-lg mx-auto">
             Teknologi terdepan, layanan terpercaya, dan harga terjangkau untuk semua kebutuhan digital kamu
           </p>
         </div>
@@ -74,12 +74,7 @@ export default function Features() {
           {features.map((feat, i) => (
             <div
               key={i}
-              className="group relative rounded-3xl p-6 card-hover cursor-default"
-              style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                backdropFilter: "blur(10px)",
-              }}
+              className="group relative rounded-3xl p-6 card-hover cursor-default bg-white border border-slate-100 shadow-sm hover:shadow-md"
             >
               {/* Hover border glow */}
               <div
@@ -91,7 +86,7 @@ export default function Features() {
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
                 style={{
-                  background: `${feat.color}18`,
+                  background: `${feat.color}15`,
                   border: `1px solid ${feat.color}33`,
                   boxShadow: `0 0 20px ${feat.glow}`,
                   ["--feat-color" as string]: feat.color,
@@ -100,8 +95,8 @@ export default function Features() {
                 <feat.icon className={`w-7 h-7 [color:var(--feat-color)]`} />
               </div>
 
-              <h3 className="font-display font-700 text-lg text-white mb-2">{feat.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{feat.desc}</p>
+              <h3 className="font-display font-bold text-lg text-slate-800 mb-2">{feat.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{feat.desc}</p>
 
               {/* Bottom accent line */}
               <div
@@ -119,7 +114,7 @@ export default function Features() {
               ["Ultra Fast", "Unlimited", "Low Latency", "Fiber Optic", "24/7 Support", "Gaming Ready", "4K Streaming", "Stable Connection"].map((text, i) => (
                 <div key={`${rep}-${i}`} className="inline-flex items-center gap-3 glass px-5 py-2.5 rounded-full">
                   <span className="w-1.5 h-1.5 bg-brand-purple rounded-full" />
-                  <span className="text-sm font-semibold text-white/60">{text}</span>
+                  <span className="text-sm font-semibold text-slate-500">{text}</span>
                 </div>
               ))
             )}
