@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MyRepublic Bandung | Internet Fiber Ultra Cepat",
-  description: "Sales resmi MyRepublic Bandung. Internet fiber optik ultra cepat, unlimited, stabil untuk streaming, gaming, dan work from home. Daftar sekarang!",
-  keywords: "myrepublic bandung, internet fiber bandung, wifi cepat bandung, langganan internet bandung",
+  title: "MyRepublic | Internet Fiber Ultra Cepat",
+  description: "Sales resmi MyRepublic. Internet fiber optik ultra cepat, unlimited, stabil untuk streaming, gaming, dan work from home. Daftar sekarang!",
+  keywords: "myrepublic, internet fiber, wifi cepat, langganan internet",
 };
 
 export default function RootLayout({
@@ -14,6 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className="scroll-smooth">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
       <body className="noise antialiased">
         {children}
       </body>
