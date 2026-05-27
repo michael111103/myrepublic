@@ -1,21 +1,21 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @theme {
-  --font-family-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-family-display: 'Syne', sans-serif;
+  --font-family-sans: 'Inter', sans-serif;
+  --font-family-display: 'Space Grotesk', sans-serif;
 
   --color-brand-purple: #7C3AED;
   --color-brand-violet: #5B21B6;
-  --color-brand-light: #A78BFA;
-  --color-brand-glow: #C4B5FD;
+  --color-brand-light: #6D28D9;
+  --color-brand-glow: #8B5CF6;
   --color-neon-green: #22C55E;
   --color-neon-cyan: #06B6D4;
   --color-neon-lime: #84CC16;
-  --color-dark-900: #04020F;
-  --color-dark-800: #080416;
-  --color-dark-700: #0D0824;
-  --color-dark-600: #130E30;
+  --color-dark-900: #FFFFFF;
+  --color-dark-800: #F8F7FF;
+  --color-dark-700: #F1EEFF;
+  --color-dark-600: #EDE9FE;
 
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -35,9 +35,9 @@
 }
 
 body {
-  background-color: #04020F;
-  color: #F8FAFC;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FFFFFF;
+  color: #1E1B4B;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
@@ -46,7 +46,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #080416;
+  background: #F1EEFF;
 }
 ::-webkit-scrollbar-thumb {
   background: #7C3AED;
@@ -58,17 +58,17 @@ body {
   content: '';
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 100;
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
-/* Glassmorphism */
+/* Glassmorphism - light theme */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(124, 58, 237, 0.04);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(124, 58, 237, 0.12);
 }
 
 .glass-purple {
@@ -79,16 +79,16 @@ body {
 
 /* Glow effects */
 .glow-purple {
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.4), 0 0 60px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.35), 0 0 60px rgba(124, 58, 237, 0.15);
 }
 
 .glow-text {
-  text-shadow: 0 0 40px rgba(167, 139, 250, 0.6);
+  text-shadow: 0 0 40px rgba(124, 58, 237, 0.4);
 }
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 40%, #06B6D4 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 40%, #06B6D4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,7 +103,7 @@ body {
 
 /* Particle dots */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(124, 58, 237, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(124, 58, 237, 0.12) 1px, transparent 1px);
   background-size: 30px 30px;
 }
 
@@ -118,8 +118,8 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(124, 58, 237, 0.18);
 }
 
 /* Signal bars */
@@ -144,8 +144,8 @@ body {
 }
 
 @keyframes borderGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.5); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.9), 0 0 80px rgba(124, 58, 237, 0.4); }
+  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.8), 0 0 80px rgba(124, 58, 237, 0.3); }
 }
 
 @keyframes marquee {
@@ -206,4 +206,13 @@ body {
 
 .animate-blink {
   animation: blink 1s step-end infinite;
+}
+
+/* Carousel hide scrollbar */
+.carousel-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
 }
