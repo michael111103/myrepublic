@@ -43,7 +43,7 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            
+            <a
               key={link.label}
               href={link.href}
               className="text-sm text-slate-600 hover:text-brand-purple transition-colors duration-200 font-medium relative group"
@@ -56,7 +56,7 @@ export default function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-3">
-          
+          <a
             href="#register"
             className="relative px-5 py-2.5 rounded-xl font-semibold text-sm text-white overflow-hidden group"
             style={{
@@ -89,7 +89,7 @@ export default function Navbar() {
       >
         <div className="bg-white/95 backdrop-blur-xl mx-4 mt-2 rounded-2xl p-4 flex flex-col gap-3 border border-purple-100 shadow-lg">
           {navLinks.map((link) => (
-            
+            <a
               key={link.label}
               href={link.href}
               onClick={() => setMenuOpen(false)}
