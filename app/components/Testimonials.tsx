@@ -1,5 +1,6 @@
 "use client";
 import { StarIcon } from "./Icons";
+import { useEffect, useRef, useState } from "react";
 
 const testimonials = [
   {
@@ -53,50 +54,63 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
+  const [current, setCurrent] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-      {/* Background */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-purple/8 rounded-full blur-[120px]" />
+  const goTo = (idx: number) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrent(idx);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+    }, 3500);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const handleDotClick = (idx: number) => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    goTo(idx);
+    intervalRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+    }, 3500);
+  };
+
+  return (
+    <section className="py-24 relative overflow-hidden bg-white">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/20 to-transparent" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-purple/4 rounded-full blur-[120px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 glass-purple px-4 py-2 rounded-full mb-6">
-            <StarIcon className="w-4 h-4 text-yellow-400" />
-            <span className="text-xs font-semibold text-brand-light tracking-wider uppercase">Testimoni Pelanggan</span>
-          </div>
-          <h2 className="font-display font-800 text-4xl sm:text-5xl text-white mb-4 tracking-tight">
+          <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-900 mb-4 tracking-tight">
             Kata Mereka<br /><span className="gradient-text">Tentang Kami</span>
           </h2>
-          <p className="text-white/50 max-w-lg mx-auto">
+          <p className="text-slate-400 max-w-lg mx-auto">
             50.000+ pelanggan puas di seluruh area Bandung mempercayai MyRepublic untuk kebutuhan internet mereka
           </p>
         </div>
 
-        {/* Testimonial grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Desktop grid */}
+        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="group rounded-3xl p-6 card-hover"
-              style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.06)",
-              }}
+              className="group rounded-3xl p-6 card-hover bg-white border border-slate-100 shadow-sm hover:shadow-md"
             >
-              {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_, j) => (
                   <StarIcon key={j} className="w-4 h-4 text-yellow-400" />
                 ))}
               </div>
-
-              <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
-                "{t.text}"
-              </p>
-
+              <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white flex-shrink-0"
@@ -105,40 +119,64 @@ export default function Testimonials() {
                   {t.avatar}
                 </div>
                 <div>
-                  <div className="font-semibold text-white text-sm">{t.name}</div>
-                  <div className="text-white/40 text-xs">{t.role}</div>
+                  <div className="font-semibold text-slate-800 text-sm">{t.name}</div>
+                  <div className="text-slate-400 text-xs">{t.role}</div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Coverage area */}
-        <div className="mt-20 text-center">
-          <h3 className="font-display font-700 text-2xl text-white mb-8">
-            Area Layanan <span className="gradient-text">Bandung & Sekitarnya</span>
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              "Bandung Kota", "Bandung Barat", "Cimahi", "Padalarang",
-              "Lembang", "Soreang", "Banjaran", "Majalaya", "Cileunyi", "Rancaekek",
-              "Margahayu", "Katapang", "Bojongsoang", "Dayeuhkolot", "Baleendah",
-            ].map((area, i) => (
-              <span
+        {/* Mobile carousel */}
+        <div className="sm:hidden">
+          <div className="relative overflow-hidden rounded-3xl">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${current * 100}%)` }}
+            >
+              {testimonials.map((t, i) => (
+                <div
+                  key={i}
+                  className="w-full flex-shrink-0 p-6 bg-white border border-slate-100 shadow-sm rounded-3xl"
+                >
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(t.rating)].map((_, j) => (
+                      <StarIcon key={j} className="w-4 h-4 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white flex-shrink-0"
+                      style={{ background: t.color }}
+                    >
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-slate-800 text-sm">{t.name}</div>
+                      <div className="text-slate-400 text-xs">{t.role}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {testimonials.map((_, i) => (
+              <button
                 key={i}
-                className="px-4 py-2 rounded-xl text-sm font-medium text-white/60 hover:text-white transition-colors duration-200"
+                onClick={() => handleDotClick(i)}
+                className="transition-all duration-300 rounded-full border-2 border-brand-purple"
                 style={{
-                  background: "rgba(124, 58, 237, 0.1)",
-                  border: "1px solid rgba(124, 58, 237, 0.2)",
+                  width: i === current ? 20 : 10,
+                  height: 10,
+                  background: i === current ? "#7C3AED" : "white",
                 }}
-              >
-                {area}
-              </span>
+              />
             ))}
           </div>
-          <p className="text-white/30 text-sm mt-6">
-            * Belum tersedia di area kamu? Hubungi kami untuk informasi ekspansi jaringan.
-          </p>
         </div>
       </div>
     </section>
