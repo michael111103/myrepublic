@@ -146,7 +146,79 @@ const comboPackages = [
 
 type PkgType = typeof fiberPackages[0];
 
-function PackageCarousel({ packages }: { packages: PkgType[] }) {
+function PackageCard({ pkg, onSubscribe }: { pkg: PkgType; onSubscribe: (pkg: PkgType) => void }) {
+  return (
+    // pt-6 memberi ruang atas agar tag badge tidak terpotong
+    <div className="relative pt-6 h-full">
+      {pkg.tag && (
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold text-white z-10 tracking-wider whitespace-nowrap"
+          style={{ background: pkg.color, boxShadow: `0 4px 20px ${pkg.glow}` }}
+        >
+          {pkg.tag}
+        </div>
+      )}
+      <div
+        className="rounded-3xl p-6 flex flex-col h-full bg-white border shadow-sm"
+        style={{ borderColor: pkg.color + "33" }}
+      >
+        {/* Header */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-display font-bold text-xl text-slate-900">{pkg.name}</h3>
+              <div className="text-sm font-semibold mt-1" style={{ color: pkg.color }}>
+                {pkg.speed}
+              </div>
+            </div>
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{ background: `${pkg.color}15`, border: `1px solid ${pkg.color}33`, color: pkg.color }}
+            >
+              <RocketIcon className="w-6 h-6" />
+            </div>
+          </div>
+          <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-slate-400 line-through text-sm">
+                Rp {pkg.originalPrice.toLocaleString("id-ID")}
+              </span>
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: pkg.color }}>
+                -{pkg.discount}%
+              </span>
+            </div>
+            <div className="font-display font-bold text-3xl text-slate-900">
+              Rp {pkg.price.toLocaleString("id-ID")}
+            </div>
+            <div className="text-slate-400 text-xs mt-1">per bulan · sudah termasuk PPN 11%</div>
+          </div>
+        </div>
+
+        {/* Features — flex-1 mendorong button ke bawah */}
+        <ul className="space-y-2.5 mb-8 flex-1">
+          {pkg.features.map((feat, i) => (
+            <li key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
+              <CheckIcon className="w-5 h-5 flex-shrink-0" style={{ color: pkg.color } as React.CSSProperties} />
+              {feat}
+            </li>
+          ))}
+        </ul>
+
+        {/* Button selalu di paling bawah card */}
+        <button
+          onClick={() => onSubscribe(pkg)}
+          className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-colors duration-300"
+          style={{ background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}bb)`, boxShadow: `0 0 20px ${pkg.glow}` }}
+        >
+          Langganan Sekarang
+          <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function PackageCarousel({ packages, onSubscribe }: { packages: PkgType[]; onSubscribe: (pkg: PkgType) => void }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -166,85 +238,21 @@ function PackageCarousel({ packages }: { packages: PkgType[] }) {
     setActiveIdx(idx);
   };
 
-  const handleSubscribe = (pkg: PkgType) => {
-    const msg = `Halo! Saya tertarik berlangganan paket *${pkg.name} ${pkg.speed}* seharga Rp ${pkg.price.toLocaleString("id-ID")}/bulan. Mohon informasi lebih lanjut 🙏`;
-    window.open(`https://wa.me/6287720009792?text=${encodeURIComponent(msg)}`, "_blank");
-  };
-
   return (
     <div>
+      {/* items-stretch memastikan semua card wrapper sama tinggi */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-4 overflow-x-auto carousel-scroll pb-2 snap-x snap-mandatory"
+        className="flex items-stretch gap-4 overflow-x-auto carousel-scroll pb-2 snap-x snap-mandatory"
       >
         {packages.map((pkg) => (
-          <div key={pkg.id} className="snap-start flex-shrink-0 w-[85vw] max-w-sm">
-            <div className="relative card-hover">
-              {pkg.tag && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold text-white z-10 tracking-wider"
-                  style={{ background: pkg.color, boxShadow: `0 4px 20px ${pkg.glow}` }}
-                >
-                  {pkg.tag}
-                </div>
-              )}
-              <div
-                className="h-full rounded-3xl p-6 flex flex-col bg-white border shadow-sm"
-                style={{ borderColor: pkg.color + "33" }}
-              >
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="font-display font-bold text-xl text-slate-900">{pkg.name}</h3>
-                      <div className="text-sm font-semibold mt-1" style={{ color: pkg.color }}>
-                        {pkg.speed}
-                      </div>
-                    </div>
-                    <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                      style={{ background: `${pkg.color}15`, border: `1px solid ${pkg.color}33`, color: pkg.color }}
-                    >
-                      <RocketIcon className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-slate-400 line-through text-sm">
-                        Rp {pkg.originalPrice.toLocaleString("id-ID")}
-                      </span>
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: pkg.color }}>
-                        -{pkg.discount}%
-                      </span>
-                    </div>
-                    <div className="font-display font-bold text-3xl text-slate-900">
-                      Rp {pkg.price.toLocaleString("id-ID")}
-                    </div>
-                    <div className="text-slate-400 text-xs mt-1">per bulan · sudah termasuk PPN 11%</div>
-                  </div>
-                </div>
-                <ul className="space-y-2.5 mb-8 flex-1">
-                  {pkg.features.map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
-                      <CheckIcon className="w-5 h-5 flex-shrink-0" style={{ color: pkg.color } as React.CSSProperties} />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  onClick={() => handleSubscribe(pkg)}
-                  className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-all duration-300 hover:scale-[1.02]"
-                  style={{ background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}bb)`, boxShadow: `0 0 20px ${pkg.glow}` }}
-                >
-                  Langganan Sekarang
-                  <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
+          // self-stretch + flex flex-col agar tiap slot ikut tinggi terpanjang
+          <div key={pkg.id} className="snap-start flex-shrink-0 w-[85vw] max-w-sm self-stretch flex flex-col">
+            <PackageCard pkg={pkg} onSubscribe={onSubscribe} />
           </div>
         ))}
       </div>
-      {/* Dots */}
       <div className="flex justify-center gap-2 mt-5">
         {packages.map((_, i) => (
           <button
@@ -308,76 +316,18 @@ export default function Packages() {
           </div>
         </div>
 
-        {/* Desktop grid — semua card tinggi sama, button selalu di bawah */}
-        <div className={`hidden sm:grid gap-6 ${packages.length > 3 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} items-stretch`}>
+        {/* Desktop grid — items-stretch agar semua baris sama tinggi */}
+        <div className="hidden sm:grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {packages.map((pkg) => (
-            <div key={pkg.id} className="relative w-full max-w-sm mx-auto card-hover flex flex-col">
-              {pkg.tag && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold text-white z-10 tracking-wider"
-                  style={{ background: pkg.color, boxShadow: `0 4px 20px ${pkg.glow}` }}
-                >
-                  {pkg.tag}
-                </div>
-              )}
-              <div
-                className="rounded-3xl p-6 flex flex-col flex-1 bg-white border shadow-sm h-full"
-                style={{ borderColor: pkg.color + "33" }}
-              >
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="font-display font-bold text-xl text-slate-900">{pkg.name}</h3>
-                      <div className="text-sm font-semibold mt-1" style={{ color: pkg.color }}>
-                        {pkg.speed}
-                      </div>
-                    </div>
-                    <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                      style={{ background: `${pkg.color}15`, border: `1px solid ${pkg.color}33`, color: pkg.color }}
-                    >
-                      <RocketIcon className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-slate-400 line-through text-sm">
-                        Rp {pkg.originalPrice.toLocaleString("id-ID")}
-                      </span>
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: pkg.color }}>
-                        -{pkg.discount}%
-                      </span>
-                    </div>
-                    <div className="font-display font-bold text-3xl text-slate-900">
-                      Rp {pkg.price.toLocaleString("id-ID")}
-                    </div>
-                    <div className="text-slate-400 text-xs mt-1">per bulan · sudah termasuk PPN 11%</div>
-                  </div>
-                </div>
-                <ul className="space-y-2.5 mb-8 flex-1">
-                  {pkg.features.map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
-                      <CheckIcon className="w-5 h-5 flex-shrink-0" style={{ color: pkg.color } as React.CSSProperties} />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  onClick={() => handleSubscribe(pkg)}
-                  className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-all duration-300 hover:scale-[1.02] mt-auto"
-                  style={{ background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}bb)`, boxShadow: `0 0 20px ${pkg.glow}` }}
-                >
-                  Langganan Sekarang
-                  <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
+            <div key={pkg.id} className="flex flex-col">
+              <PackageCard pkg={pkg} onSubscribe={handleSubscribe} />
             </div>
           ))}
         </div>
 
         {/* Mobile carousel */}
         <div className="sm:hidden">
-          <PackageCarousel packages={packages} />
+          <PackageCarousel packages={packages} onSubscribe={handleSubscribe} />
         </div>
 
         <p className="text-center text-slate-400 text-xs mt-8">
