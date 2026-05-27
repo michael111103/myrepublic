@@ -57,10 +57,6 @@ export default function Features() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 glass-purple px-4 py-2 rounded-full mb-6">
-            <WifiIcon className="w-4 h-4 text-brand-light" />
-            <span className="text-xs font-semibold text-brand-light tracking-wider uppercase">Keunggulan Kami</span>
-          </div>
           <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-900 mb-4 tracking-tight">
             Kenapa <span className="gradient-text">MyRepublic</span>?
           </h2>
