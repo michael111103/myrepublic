@@ -4,6 +4,19 @@ import { WhatsAppIcon, TiktokIcon, InstagramIcon, FacebookIcon, LocationIcon, Ph
 export default function Footer() {
   const waLink = `https://wa.me/6287720009792?text=${encodeURIComponent("Halo, saya ingin bertanya tentang paket internet MyRepublic 🙏")}`;
 
+  const addresses = [
+    {
+      label: "Kantor Utama",
+      text: "Jl. Pungkur No.217c, Balonggede, Kec. Lengkong, Kota Bandung, Jawa Barat 40252",
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=Jl.+Pungkur+No.217c,+Balonggede,+Kec.+Lengkong,+Kota+Bandung,+Jawa+Barat+40252",
+    },
+    {
+      label: "Kantor Marketing",
+      text: "Jl. Cikoang No.50b, Cigending, Kec. Ujung Berung, Kota Bandung, Jawa Barat 40616",
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=Jl.+Cikoang+No.50b,+Cigending,+Kec.+Ujung+Berung,+Kota+Bandung,+Jawa+Barat+40616",
+    },
+  ];
+
   return (
     <footer id="contact" className="relative pt-20 pb-8 overflow-hidden bg-slate-50">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
@@ -11,9 +24,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* CTA Banner */}
-        <div
-          className="rounded-3xl p-10 mb-16 text-center relative overflow-hidden bg-white border border-purple-100 shadow-sm"
-        >
+        <div className="rounded-3xl p-10 mb-16 text-center relative overflow-hidden bg-white border border-purple-100 shadow-sm">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-px bg-gradient-to-r from-transparent via-brand-purple to-transparent" />
 
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mb-4">
@@ -45,7 +56,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Footer brand only */}
+        {/* Footer brand */}
         <div className="mb-12">
           <div className="flex items-center gap-2.5 mb-4">
             <Image
@@ -60,15 +71,35 @@ export default function Footer() {
             Sales resmi MyRepublic Bandung. Melayani pemasangan internet fiber optik ultra cepat dan unlimited untuk area Bandung dan sekitarnya.
           </p>
 
-          <div className="flex items-start gap-2 text-slate-400 text-sm mb-3">
-            <LocationIcon className="w-4 h-4 flex-shrink-0 mt-0.5 text-brand-purple" />
-            <span>Jl. Cikoang No.50b, Cigending, Kec. Ujung Berung, Kota Bandung, Jawa Barat 40616</span>
+          {/* Alamat */}
+          <div className="flex flex-col gap-3 mb-3">
+            {addresses.map((addr) => (
+              <a
+                key={addr.label}
+                href={addr.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-slate-400 text-sm hover:text-brand-purple transition-colors duration-200 group"
+              >
+                <LocationIcon className="w-4 h-4 flex-shrink-0 mt-0.5 text-brand-purple" />
+                <span>
+                  <span className="font-semibold text-brand-purple">({addr.label})</span>{" "}
+                  {addr.text}
+                </span>
+              </a>
+            ))}
           </div>
 
-          <div className="flex items-center gap-2 text-slate-400 text-sm">
+          {/* Nomor telepon */}
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-slate-400 text-sm hover:text-brand-purple transition-colors duration-200"
+          >
             <PhoneIcon className="w-4 h-4 text-brand-purple" />
             <span>087720009792</span>
-          </div>
+          </a>
 
           {/* Socials */}
           <div className="flex items-center gap-3 mt-6">
