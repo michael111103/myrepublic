@@ -34,7 +34,7 @@ export default function Footer() {
               }}
             >
               <WhatsAppIcon className="w-5 h-5" />
-              0812 1244 9194
+              Whatsapp
             </a>
             <a
               href="#register"
@@ -62,12 +62,12 @@ export default function Footer() {
 
           <div className="flex items-start gap-2 text-slate-400 text-sm mb-3">
             <LocationIcon className="w-4 h-4 flex-shrink-0 mt-0.5 text-brand-purple" />
-            <span>Jl. Pungkur No.217c, Balonggede, Kec. Lengkong, Kota Bandung, Jawa Barat 40252</span>
+            <span>Jl. Cikoang No.50b, Cigending, Kec. Ujung Berung, Kota Bandung, Jawa Barat 40616</span>
           </div>
 
           <div className="flex items-center gap-2 text-slate-400 text-sm">
             <PhoneIcon className="w-4 h-4 text-brand-purple" />
-            <span>0812 1244 9194</span>
+            <span>087720009792</span>
           </div>
 
           {/* Socials */}
