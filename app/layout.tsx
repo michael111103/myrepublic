@@ -6,9 +6,12 @@ export const metadata: Metadata = {
   description: "Sales resmi MyRepublic. Internet fiber optik ultra cepat, unlimited, stabil untuk streaming, gaming, dan work from home. Daftar sekarang!",
   keywords: "myrepublic, internet fiber, wifi cepat, langganan internet",
   icons: {
-    icon: "/myrepublic.svg",
-    shortcut: "/myrepublic.svg",
-    apple: "/myrepublic.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
   },
 };
 
