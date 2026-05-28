@@ -8,13 +8,12 @@ const fiberPackages = [
   {
     id: "neo",
     name: "Neo",
-    speed: "100 Mbps",
+    speed: "200 Mbps",
     price: 233100,
     originalPrice: 600000,
     discount: 36,
     color: "#7C3AED",
     glow: "rgba(124,58,237,0.3)",
-    tag: null,
     features: [
       "Unlimited kuota",
       "Teknologi Fiber Optik",
@@ -26,71 +25,87 @@ const fiberPackages = [
   {
     id: "velo",
     name: "Velo",
-    speed: "150 Mbps",
-    price: 290000,
+    speed: "300 Mbps",
+    price: 277500,
     originalPrice: 750000,
     discount: 38,
     color: "#06B6D4",
     glow: "rgba(6,182,212,0.3)",
-    tag: "POPULER",
     features: [
       "Unlimited kuota",
       "Teknologi Fiber Optik",
       "Router WiFi 6 gratis",
       "Garansi Uptime 99.9%",
       "Customer service 24/7",
-      "Static IP tersedia",
+      "Free Upgrade 6 Bulan",
     ],
   },
   {
     id: "nexus",
     name: "Nexus",
-    speed: "300 Mbps",
-    price: 410000,
+    speed: "400 Mbps",
+    price: 333000,
     originalPrice: 900000,
     discount: 40,
     color: "#22C55E",
     glow: "rgba(34,197,94,0.3)",
-    tag: null,
     features: [
       "Unlimited kuota",
       "Teknologi Fiber Optik",
       "Router WiFi 6 gratis",
       "Garansi Uptime 99.9%",
       "Customer service 24/7",
-      "Static IP tersedia",
-      "Prioritas bandwidth",
-    ],
-  },
-  {
-    id: "mygamer",
-    name: "MyGamer",
-    speed: "250 Mbps",
-    price: 380000,
-    originalPrice: 850000,
-    discount: 39,
-    color: "#F59E0B",
-    glow: "rgba(245,158,11,0.3)",
-    tag: "GAMING",
-    features: [
-      "Unlimited kuota",
-      "Low latency <5ms",
-      "Router Gaming WiFi 6",
-      "Garansi Uptime 99.9%",
-      "Customer service 24/7",
-      "Optimized for gaming",
+      "Free Upgrade 6 Bulan",
+      "Gratis Vidio Lite",
     ],
   },
   {
     id: "prime",
     name: "Prime",
     speed: "500 Mbps",
-    price: 570000,
+    price: 555000,
     originalPrice: 1200000,
     discount: 42,
     color: "#EC4899",
     glow: "rgba(236,72,153,0.3)",
-    tag: "BEST VALUE",
+    features: [
+      "Unlimited kuota",
+      "Teknologi Fiber Optik",
+      "Router WiFi 6E gratis",
+      "Garansi Uptime 99.9%",
+      "Dedicated support",
+      "Static IP included",
+      "Gratis Vidio Lite",
+    ],
+  },
+  {
+    id: "wonder",
+    name: "Wonder",
+    speed: "750 Mbps",
+    price: 721000,
+    originalPrice: 1400000,
+    discount: 48,
+    color: "#8B5CF6",
+    glow: "rgba(139,92,246,0.3)",
+    features: [
+      "Unlimited kuota",
+      "Teknologi Fiber Optik",
+      "Router WiFi 6E gratis",
+      "Garansi Uptime 99.9%",
+      "Dedicated support",
+      "Static IP included",
+      "Gratis Vidio Lite",
+    ],
+  },
+  {
+    id: "ultra",
+    name: "Ultra",
+    speed: "1 Gbps",
+    price: 943500,
+    originalPrice: 1800000,
+    discount: 47,
+    color: "#F59E0B",
+    glow: "rgba(245,158,11,0.3)",
     features: [
       "Unlimited kuota",
       "Teknologi Fiber Optik",
@@ -99,7 +114,7 @@ const fiberPackages = [
       "Dedicated support",
       "Static IP included",
       "Prioritas bandwidth",
-      "Free instalasi",
+      "Gratis Vidio Lite",
     ],
   },
 ];
@@ -114,7 +129,6 @@ const comboPackages = [
     discount: 40,
     color: "#7C3AED",
     glow: "rgba(124,58,237,0.3)",
-    tag: null,
     features: [
       "Internet 100 Mbps",
       "MyRep Pride Box TV",
@@ -132,7 +146,6 @@ const comboPackages = [
     discount: 45,
     color: "#06B6D4",
     glow: "rgba(6,182,212,0.3)",
-    tag: "TERLARIS",
     features: [
       "Internet 300 Mbps",
       "MyRep Pride Box TV",
@@ -148,16 +161,7 @@ type PkgType = typeof fiberPackages[0];
 
 function PackageCard({ pkg, onSubscribe }: { pkg: PkgType; onSubscribe: (pkg: PkgType) => void }) {
   return (
-    // pt-6 memberi ruang atas agar tag badge tidak terpotong
-    <div className="relative pt-6 h-full">
-      {pkg.tag && (
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold text-white z-10 tracking-wider whitespace-nowrap"
-          style={{ background: pkg.color, boxShadow: `0 4px 20px ${pkg.glow}` }}
-        >
-          {pkg.tag}
-        </div>
-      )}
+    <div className="relative h-full">
       <div
         className="rounded-3xl p-6 flex flex-col h-full bg-white border shadow-sm"
         style={{ borderColor: pkg.color + "33" }}
@@ -194,7 +198,7 @@ function PackageCard({ pkg, onSubscribe }: { pkg: PkgType; onSubscribe: (pkg: Pk
           </div>
         </div>
 
-        {/* Features — flex-1 mendorong button ke bawah */}
+        {/* Features */}
         <ul className="space-y-2.5 mb-8 flex-1">
           {pkg.features.map((feat, i) => (
             <li key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
@@ -204,10 +208,10 @@ function PackageCard({ pkg, onSubscribe }: { pkg: PkgType; onSubscribe: (pkg: Pk
           ))}
         </ul>
 
-        {/* Button selalu di paling bawah card */}
+        {/* Button */}
         <button
           onClick={() => onSubscribe(pkg)}
-          className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-colors duration-300"
+          className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 group transition-colors duration-300 mt-auto"
           style={{ background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}bb)`, boxShadow: `0 0 20px ${pkg.glow}` }}
         >
           Langganan Sekarang
@@ -240,14 +244,12 @@ function PackageCarousel({ packages, onSubscribe }: { packages: PkgType[]; onSub
 
   return (
     <div>
-      {/* items-stretch memastikan semua card wrapper sama tinggi */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
         className="flex items-stretch gap-4 overflow-x-auto carousel-scroll pb-2 snap-x snap-mandatory"
       >
         {packages.map((pkg) => (
-          // self-stretch + flex flex-col agar tiap slot ikut tinggi terpanjang
           <div key={pkg.id} className="snap-start flex-shrink-0 w-[85vw] max-w-sm self-stretch flex flex-col">
             <PackageCard pkg={pkg} onSubscribe={onSubscribe} />
           </div>
@@ -316,7 +318,7 @@ export default function Packages() {
           </div>
         </div>
 
-        {/* Desktop grid — items-stretch agar semua baris sama tinggi */}
+        {/* Desktop grid */}
         <div className="hidden sm:grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {packages.map((pkg) => (
             <div key={pkg.id} className="flex flex-col">
