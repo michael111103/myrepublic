@@ -70,7 +70,7 @@ export default function Features() {
           {features.map((feat, i) => (
             <div
               key={i}
-              className="group relative rounded-3xl p-6 card-hover cursor-default bg-white border border-slate-100 shadow-sm hover:shadow-md"
+              className="group relative rounded-3xl p-6 cursor-default bg-white border border-slate-100 shadow-sm hover:shadow-md"
             >
               {/* Hover border glow */}
               <div
@@ -101,20 +101,6 @@ export default function Features() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Marquee strip */}
-        <div className="mt-20 overflow-hidden">
-          <div className="flex gap-8 animate-marquee whitespace-nowrap">
-            {[...Array(2)].map((_, rep) =>
-              ["Ultra Fast", "Unlimited", "Low Latency", "Fiber Optic", "24/7 Support", "Gaming Ready", "4K Streaming", "Stable Connection"].map((text, i) => (
-                <div key={`${rep}-${i}`} className="inline-flex items-center gap-3 glass px-5 py-2.5 rounded-full">
-                  <span className="w-1.5 h-1.5 bg-brand-purple rounded-full" />
-                  <span className="text-sm font-semibold text-slate-500">{text}</span>
-                </div>
-              ))
-            )}
-          </div>
         </div>
       </div>
     </section>
