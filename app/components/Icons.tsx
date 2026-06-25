@@ -269,6 +269,22 @@ export const DraftDotIcon = ({ className = "w-3 h-3", style }: IconProps) => (
   </svg>
 );
 
+export const StarIcon = ({ className = "w-5 h-5", style }: IconProps) => (
+  <svg className={className} style={style} viewBox="0 0 20 20" fill="currentColor">
+    <path d="M10 1L12.4 7.5H19.5L13.9 11.6L16.2 18.1L10 14L3.8 18.1L6.1 11.6L0.5 7.5H7.6L10 1Z"/>
+  </svg>
+);
+
+export const SignalIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="16" width="3" height="5" rx="1" fill="currentColor"/>
+    <rect x="7" y="12" width="3" height="9" rx="1" fill="currentColor" fillOpacity="0.7"/>
+    <rect x="12" y="8" width="3" height="13" rx="1" fill="currentColor" fillOpacity="0.5"/>
+    <rect x="17" y="4" width="3" height="17" rx="1" fill="currentColor" fillOpacity="0.3"/>
+    <path d="M2 3C6 3 12 5 18 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="2 3"/>
+  </svg>
+);
+
 export const ImagePlaceholderIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="3"/>
