@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Paket Internet", href: "#packages" },
-  { label: "Promo", href: "#promo" },
-  { label: "Addon", href: "#addon" },
-  { label: "Kontak Sales", href: "#contact" },
+  { label: "Paket Internet", href: "/#packages" },
+  { label: "Addon", href: "/#addon" },
+  { label: "Artikel", href: "/artikel" },
+  { label: "Kontak Sales", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -28,8 +28,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center group">
+        <a href="/" className="flex items-center group">
           <Image
             src="/myrepublic.svg"
             alt="MyRepublic Bandung"
@@ -40,7 +39,6 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -54,7 +52,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button */}
         <div className="hidden md:flex items-center gap-3">
           <a
             href="#register"
@@ -69,7 +66,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden flex flex-col gap-1.5 p-2"
@@ -81,10 +77,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`md:hidden transition-all duration-300 overflow-hidden ${
-          menuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-white/95 backdrop-blur-xl mx-4 mt-2 rounded-2xl p-4 flex flex-col gap-3 border border-purple-100 shadow-lg">
