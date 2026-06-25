@@ -23,8 +23,8 @@ type FormState = {
   content: Block[];
 };
 
-const ADMIN_USER = "myrepublic";
-const ADMIN_PASS = "@lupa1122";
+const ADMIN_USER = process.env.NEXT_PUBLIC_ADMIN_USER!;
+const ADMIN_PASS = process.env.NEXT_PUBLIC_ADMIN_PASS!;
 
 function generateId() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
